@@ -41,7 +41,7 @@ while(playerAlive == True and monsterAlive == True and ranAway == False):
     print(name + ":", playerHP, "HP", playerMP,"MP")
     print(monsterName, ":", monsterHP, "HP")
     print("----------------------------------------------------------")
-    move = input("[A]ttack or [R]un?")
+    move = input("[A]ttack, [R]un or [M]agic?")
     if(move == "A" or move == "a"):
         print("You attack!")
         random = randint(1,6)
@@ -66,7 +66,7 @@ while(playerAlive == True and monsterAlive == True and ranAway == False):
     elif(move == "M" or move == "m"):
         if(playerMP > 0):
             random = randint(10, 15)
-            playerMP -= 5
+            playerMP -= randint(4, 10)
             print(name, "used fire magic and did", random, "damage!")
             monsterHP -= random
             random = randint(1, 10)
@@ -78,6 +78,8 @@ while(playerAlive == True and monsterAlive == True and ranAway == False):
             if(playerHP <= 0):
                 print("You are defeated :( ")
                 playerAlive = False
+            if(playerMP < 0):
+                playerMP = 0;
     else:
         print(name,"did nothing")
 
