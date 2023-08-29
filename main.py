@@ -5,6 +5,7 @@ playerAlive = True
 ranAway = False
 playerHP = 50
 monsterHP = 50
+playerMP = 20
 monsterNames = [
     "BUMBLEBLAZE", "GIGGLEFROST", "WHISKERWHIRL", "SNUGGLEFLAME", "GLOOMSPARK",
     "RAINBOWWHISPER", "FUZZYGLOOM", "SPARKLEPAW", "TOOTHYSWIRL", "FLUFFERNOVA",
@@ -34,10 +35,12 @@ monsterName = monsterNames[randint(0,99)]
 name = input("Hi Player! What is your name?\n")
 print("Hi", name, ", everything seems quiet and relaxed until .....")
 print("A HORRIBLE MONSTER NAMED", monsterName, "APPEARS!")
-print("----------------------------------------------------------")
+
 while(playerAlive == True and monsterAlive == True and ranAway == False):
-    print(name, "",playerHP, "HP")
+    print("----------------------------------------------------------")
+    print(name + ":", playerHP, "HP", playerMP,"MP")
     print(monsterName, ":", monsterHP, "HP")
+    print("----------------------------------------------------------")
     move = input("[A]ttack or [R]un?")
     if(move == "A" or move == "a"):
         print("You attack!")
@@ -60,6 +63,21 @@ while(playerAlive == True and monsterAlive == True and ranAway == False):
             print(name, "ran away!")
         else:
             print(monsterName, "blocks you!")
+    elif(move == "M" or move == "m"):
+        if(playerMP > 0):
+            random = randint(10, 15)
+            playerMP -= 5
+            print(name, "used fire magic and did", random, "damage!")
+            monsterHP -= random
+            random = randint(1, 10)
+            playerHP -= random
+            print(monsterName, "did", random, "damage!")
+            if (monsterHP <= 0):
+                print("You defeated", monsterName, "!")
+                monsterAlive = False
+            if(playerHP <= 0):
+                print("You are defeated :( ")
+                playerAlive = False
     else:
         print(name,"did nothing")
 
